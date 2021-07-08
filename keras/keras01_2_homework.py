@@ -17,3 +17,10 @@ print('loss:', loss)
 
 result = model.predict([6])
 print('6의 예측값 :', result)
+
+
+'''
+#5. 결과값
+loss: 0.38000068068504333
+6의 예측값 : [[5.701253]]
+'''
