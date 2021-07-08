@@ -1,6 +1,7 @@
 from tensorflow.keras.models import Sequential  # Sequential : 순차적으로 내려가는 모델
 from tensorflow.keras.layers import Dense
 import numpy as np
+import matplotlib.pyplot as plt
 
 #1. 데이터
 x = np.array([1,2,3,4,5])
@@ -31,5 +32,12 @@ print('6의 예측값 :', result)
 
 '''
 #5. 결과값
-
+loss:  0.38008081912994385
+6의 예측값 : [[5.7160087]]
 '''
+
+y_predict = model.predict(x)
+
+plt.scatter(x,y)
+plt.plot(x,y_predict, color='red')
+plt.show()

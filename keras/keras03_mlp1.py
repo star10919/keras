@@ -14,9 +14,11 @@
 행무시, 열우선
 '''
 
+from matplotlib import colors
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
+import matplotlib.pyplot as plt
 
 #1-1. 데이터
 x = np.array([[1,2,3,4,5,6,7,8,9,10], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.5, 1.4, 1.3]])  # 2행 10열
@@ -53,6 +55,12 @@ print('10, 1.3의 예측값 :', result)
 
 '''
 #5. 결과값
-loss : 5.106368917040527e-06
-10, 1.3의 예측값 : [[19.994509]]
+loss : 1.6410689568147063e-05
+10, 1.3의 예측값 : [[19.99773]]
 '''
+
+y_predict = model.predict(x)
+
+plt.scatter(x,[y,y])
+plt.plot(y_predict, color='red')
+plt.show()
