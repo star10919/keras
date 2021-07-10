@@ -15,11 +15,12 @@ model.add(Dense(5))
 model.add(Dense(4))
 model.add(Dense(6))
 model.add(Dense(6))
+model.add(Dense(4))
 model.add(Dense(1))
 
 #3.컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
-model.fit(x, y, epochs=5000, batch_size=10000)
+model.fit(x, y, epochs=5500, batch_size=20000)
 
 #4.평가, 예측
 loss = model.evaluate(x, y)
@@ -30,8 +31,7 @@ print('6의 예측값 :', y_predict)
 
 '''
 #5. 결과값
-loss: 0.3800007700920105
-6의 예측값 : [[5.7015915]]
+
 '''
 
 # R2 결정 계수 : 정확도와 유사한 지표

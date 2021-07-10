@@ -42,7 +42,7 @@ model.fit(x_train, y_train, epochs=150, batch_size=1)
 loss = model.evaluate(x_test, y_test)
 ic('loss : ', loss)
 y_predict = model.predict(x_test) # x_test를 훈련시킨 값으로
-ic('100의 예측값 : ', y_predict)
+# ic('100의 예측값 : ', y_predict)
 
 
 # R2 결정 계수 : 정확도와 유사한 지표
