@@ -15,12 +15,12 @@ model.add(Dense(5))
 model.add(Dense(3))
 model.add(Dense(5))
 model.add(Dense(3))
-model.add(Dense(5))
+model.add(Dense(2))
 model.add(Dense(1))
 
 #3.컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
-model.fit(x, y, epochs=2500, batch_size=20000)
+model.fit(x, y, epochs=2000, batch_size=20000)
 
 #4.평가, 예측
 loss = model.evaluate(x, y)
