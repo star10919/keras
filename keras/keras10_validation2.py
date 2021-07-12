@@ -1,7 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
-import matplotlib.pyplot as plt
+from icecream import ic
 
 #1. 데이터
 x = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13])
@@ -14,6 +14,13 @@ x_test = x[7:10]  # 평가 데이터(30%)
 y_test = y[7:10]
 x_val = x[-3:]   # 문제집풀기
 y_val = y[-3:]
+
+# ic(x_train.shape)  # (7,)
+# ic(y_train.shape)  # (7,)
+# ic(x_test.shape)  # (3,)
+# ic(y_test.shape)  # (3,)
+# ic(x_val.shape)  # (3,)
+# ic(y_val.shape)  # (3,)
 
 
 #2. 모델구성(딥러닝 구현)
@@ -36,15 +43,8 @@ print('loss: ', loss)
 result = model.predict([11])
 print('11의 예측값 :', result)
 
-
 '''
 #5. 결과값
-loss:  2.2402846298064105e-06
-11의 예측값 : [[10.997823]]
+loss:  5.4569682106375694e-12
+11의 예측값 : [[11.000001]]
 '''
-
-# y_predict = model.predict(x)
-
-# plt.scatter(x,y)
-# plt.plot(x, y_predict, color='red')
-# plt.show()

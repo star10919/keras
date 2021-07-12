@@ -1,7 +1,6 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 #1. 데이터
@@ -35,12 +34,6 @@ print('11의 예측값 :', result)
 
 '''
 #5. 결과값
-loss:  2.2402846298064105e-06
-11의 예측값 : [[10.997823]]
+loss:  [4.21588680849308e-13, 5.165736070011917e-07]
+11의 예측값 : [[11.]]
 '''
-
-# y_predict = model.predict(x)
-
-# plt.scatter(x,y)
-# plt.plot(x, y_predict, color='red')
-# plt.show()

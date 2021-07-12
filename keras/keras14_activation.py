@@ -26,7 +26,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffl
 
 #2. 모델구성(validation)
 model = Sequential()
-model.add(Dense(70, input_shape=(10,), activation='relu')))  # 활성화함수 (default값 존재)
+model.add(Dense(70, input_shape=(10,), activation='relu'))  # 활성화함수 (default값 존재)
 model.add(Dense(30, activation='relu'))  # relu : 음수값은 0, 양수만 제대로 잡음(relu 쓰면 성능 좋아짐)
 model.add(Dense(50, activation='relu'))
 model.add(Dense(40, activation='sigmoid'))  # sigmoid : 0~1까지의 값으로 한정시켜서 숫자가 막대히 커지는 것을 막음

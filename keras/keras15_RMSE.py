@@ -2,9 +2,10 @@ from icecream import ic
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-import matplotlib.pyplot as plt
 import random
 # import tensorflow as tf
+
+
 # 1. 데이터
 x = np.array(range(100))
 y = np.array(range(1, 101))
@@ -61,4 +62,3 @@ ic(rmse)
 ic| r2: 0.9999999994188564
 ic| rmse: 0.0007128405178825408
 '''
-

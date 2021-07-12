@@ -41,7 +41,7 @@ model.add(Dense(5, input_dim=3))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
-model.compile(loss='mse', optimizer='adam', metrics=['mae'])    #metrics 쓰면 2개로 반환  # mae도 작은게 좋은거임
+model.compile(loss='mse', optimizer='adam', metrics=['mae','mse'])    #metrics 쓰면 2개 이상 반환  # mae도 작은게 좋은거임
 start = time.time()
 model.fit(x, y, epochs=100, batch_size=1, verbose=1)
 end = time.time() - start
@@ -57,8 +57,8 @@ print('10, 1.3, 1의 예측값 :', result)
 
 '''
 #5. 결과값
-loss : 2.1821415785439058e-08
-10, 1.3, 1의 예측값 : [[20.00019]]
+loss : [0.0386100634932518, 0.1685871183872223, 0.0386100634932518]
+10, 1.3, 1의 예측값 : [[19.772793]]
 '''
 
 y_predict = model.predict(x)

@@ -1,7 +1,6 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
-import matplotlib.pyplot as plt
 
 #1-1. 데이터
 x = np.array([[1,2,3,4,5,6,7,8,9,10], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.5, 1.4, 1.3], [10,9,8,7,6,5,4,3,2,1]])   # (3,10)
@@ -16,7 +15,7 @@ print(x.shape)   #(10, 3)  행무시 열우선
 #2. 모델구성
 model = Sequential()
 # model.add(Dense(5, input_dim=3))
-model.add(Dense(10, input_shape=(3,)))   #행무시 열우선 /   (10, 3)=>  input_dim=3  =  input_shape=(3,)
+model.add(Dense(10, input_shape=(3,)))   #행무시 열우선 /   2차원 : (10, 3)=>  input_dim=3  =  input_shape=(3,)
 model.add(Dense(8))
 model.add(Dense(6))
 model.add(Dense(5))
@@ -37,12 +36,8 @@ print('10, 1.3, 1의 예측값 :', result)
 
 '''
 #5. 결과값
-loss : 2.1821415785439058e-08
-10, 1.3, 1의 예측값 : [[20.00019]]
+loss : 3.21105403600086e-06
+10, 1.3, 1의 예측값 : [[20.00213]]
 '''
 
 y_predict = model.predict(x)
-
-# plt.scatter(x,[y,y,y])
-# plt.plot(y_predict, color='red')
-# plt.show()
