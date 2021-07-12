@@ -1,19 +1,3 @@
-'''
-1. [1,2,3]   스칼라 3개 = (3, ) [[1],[2]]
-2. [[1,2,3]]   1행 3열 / =3개의 특성을 가진 1개의 데이터
-3. [[1],[2],[3]]   3행 1열 /
-4. [[1,2],[3,4],[5,6]]   3행 2열 /
-5. [[[1,2,3],[4,5,6]]]   1면 2행 3열
-6. [[[1,2],[3,4],[5,6]]]   1면 3행 2열
-7. [[[1],[2]],[[3],[4]]]   2면 2행 1열
-
-제일 바깥에 있는 괄호는 무시하고 계산하기
-가장 작은단위 안에 원소의 개수 : 열
-작은단위의 개수 : 행
-특성 = 피쳐 = 컬럼 = 열
-행무시, 열우선
-'''
-
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
@@ -34,10 +18,6 @@ x = np.transpose(x)
 #2. 모델구성
 model = Sequential()
 model.add(Dense(5, input_dim=3))
-# model.add(Dense(8))
-# model.add(Dense(6))
-# model.add(Dense(5))
-# model.add(Dense(3))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
