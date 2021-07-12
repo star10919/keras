@@ -9,7 +9,7 @@ x = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13])
 y = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13])
 
 #train_test_split 으로 만들어라
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, shuffle=True, random_state=66)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.4, shuffle=True, random_state=66)
 x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.5, shuffle=True, random_state=66)
 
 #2. 모델구성(딥러닝 구현)

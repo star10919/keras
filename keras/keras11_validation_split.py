@@ -2,18 +2,14 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 #1. 데이터
-x = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13])
-y = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13])
+x = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+y = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 
-# 잘라서 만들어라
-x_train = x[:7]   # 훈련, 공부
-y_train = y[:7]
-x_test = x[7:10]  # 평가 데이터(30%)
-y_test = y[7:10]
-x_val = x[-3:]   # 문제집풀기
-y_val = y[-3:]
+#train_test_split 으로 만들어라
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, shuffle=True, random_state=66)
 
 
 #2. 모델구성(딥러닝 구현)
@@ -27,7 +23,8 @@ model.add(Dense(1))
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
 
-model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_data=(x_val, y_val))  #통상적으로 loss가 val_loss 보다 좋게 나옴(=> 더 안 좋은 val_loss에 기준을 맞춰서 하파튜해야 함)
+# model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_data=(x_val, y_val))  #통상적으로 loss가 val_loss 보다 좋게 나옴(=> 더 안 좋은 val_loss에 기준을 맞춰서 하파튜해야 함)
+model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_split=0.3, shuffle=True)  #train split2번 쓰지말고 validation split으로 써주기
 
 #4. 평가, 예측(훈련데이터와 평가데이터는 같으면 안됨)
 loss = model.evaluate(x_test, y_test)
