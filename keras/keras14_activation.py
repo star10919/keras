@@ -46,6 +46,3 @@ ic(loss)
 y_predict = model.predict(x_test)
 r2 = r2_score(y_test, y_predict)
 ic(r2)
-
-
-# 과제 0.62까지 올려라!

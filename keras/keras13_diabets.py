@@ -22,22 +22,22 @@ ic(datasets.DESCR)
 ic(x[:30])
 ic(np.min(y), np.max(y))
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=66)
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=9)
 
 #2. 모델구성(validation)
 model = Sequential()
-model.add(Dense(128, input_shape=(10,), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
-model.add(Dense(64, activation='sigmoid'))
-model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
-model.add(Dense(8, activation='relu'))
+model.add(Dense(1000, input_shape=(10,), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
+model.add(Dense(50, activation='relu'))
+model.add(Dense(40, activation='relu'))
+model.add(Dense(40, activation='relu'))
+model.add(Dense(24, activation='relu'))
+model.add(Dense(12, activation='relu'))
 model.add(Dense(4, activation='relu'))
-model.add(Dense(2, activation='relu'))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
-model.fit(x_train, y_train, epochs=100, batch_size=40, validation_split=0.3)
+model.fit(x_train, y_train, epochs=100, batch_size=33, validation_split=0.03, shuffle=True)
 
 #4. 평가, 예측(mse, r2)
 loss = model.evaluate(x_test, y_test)
@@ -49,3 +49,8 @@ ic(r2)
 
 
 # 과제 0.62까지 올려라!
+'''
+결과값
+ic| loss: 2092.216552734375
+ic| r2: 0.6214054692239842
+'''
