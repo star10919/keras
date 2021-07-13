@@ -14,7 +14,10 @@ y2 = np.array(range(1901, 2001))
 from sklearn.model_selection import train_test_split
 x1_train, x1_test, x2_train, x2_test, y1_train, y1_test, y2_train, y2_test = train_test_split(x1, x2, y1, y2, train_size=0.7)
 
-# ic(x1_train.shape, x1_test.shape,)   해놓기!!!!!!!!!!!!!!!!!!!!!!
+ic(x1_train.shape, x1_test.shape,       # (70, 3) , (30, 3)
+    x2_train.shape, x2_test.shape,      # (70, 3) , (30, 3)
+    y1_train.shape, y1_test.shape,      # (70,) , (30,)
+    y2_train.shape, y2_test.shape,)     # (70,) , (30,)
 
 #2. 모델구성
 from tensorflow.keras.models import Sequential, Model
