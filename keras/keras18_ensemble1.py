@@ -35,8 +35,9 @@ dense14 = Dense(10, activation='relu', name='dense14')(dense13)
 output2 = Dense(12, name='output2')(dense14)  #히든레이어
 
 from tensorflow.keras.layers import concatenate, Concatenate
-merge1 = concatenate([output1,output2])   #연결만 한거임
-# merge1 = Concatenate([output1,output2])   # 수정하기!!!!!!!!!!!!!!!!!!!!!
+# merge1 = concatenate([output1, output2])   #연결만 한거임   #concatenate(메소드 사용)
+concat = Concatenate()          #Concatenate(클래스 사용)
+merge1 = concat([output1, output2])   # 2개니까 리스트 사용
 merge2 = Dense(10, name='merge2')(merge1)
 merge3 = Dense(5,activation='relu', name='merge3')(merge2)
 last_output = Dense(1)(merge3)   #최종 output
