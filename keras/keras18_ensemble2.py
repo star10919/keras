@@ -38,14 +38,14 @@ output2 = Dense(4, name='output2')(dense14)  #히든레이어
 from tensorflow.keras.layers import concatenate, Concatenate
 merge1 = concatenate([output1,output2])   #연결만 한거임
 merge2 = Dense(10, name='merge2')(merge1)
-merge3 = Dense(5,activation='relu', name='merge3')(merge2)    #분기
+merge3 = Dense(5, activation='relu', name='merge3')(merge2)    #분기
 # last_output = Dense(1)(merge3)   #최종 output
 
 output21 = Dense(7)(merge3)
-last_output1 = Dense(1)(output21)
+last_output1 = Dense(1, name='last_output1')(output21)
 
 output22 = Dense(8)(merge3)
-last_output2 = Dense(1)(output22)
+last_output2 = Dense(1, name='last_output2')(output22)
 
 
 model = Model(inputs=[input1, input2], outputs=[last_output1, last_output2])
@@ -58,5 +58,12 @@ model.fit([x1_train, x2_train], [y1_train,y2_train], epochs=100, batch_size=8, v
 
 #4. 평가, 예측
 results = model.evaluate([x1_test, x2_test], [y1_test,y2_test])
-ic(results[0])   #mse
-ic(results[1])   #metrics['mae]
+ic(results)
+
+'''
+results: [117.58346557617188,       # last_output1_loss + last_output2_loss
+              62.05646896362305,    # last_output1_loss
+              55.52699279785156,    # last_output2_loss
+              6.632175922393799,    # last_output1_mae
+              6.286913871765137]    # last_output2_mae
+'''
