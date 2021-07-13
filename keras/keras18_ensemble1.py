@@ -11,8 +11,9 @@ y = np.array(range(1001, 1101))
 # ic(x1.shape, x2.shape, y.shape)    # x1.shape: (100, 3),    x2.shape: (100, 3),    y1.shape: (100,)
 
 from sklearn.model_selection import train_test_split
-x1_train, x1_test, x2_train, x2_test, y_train, y_test = train_test_split(x1, x2, y, train_size=0.7, shuffle=True,random_state=66)
+x1_train, x1_test, x2_train, x2_test, y_train, y_test = train_test_split(x1, x2, y, train_size=0.7, shuffle=True, random_state=66)
 
+# ic(x1_train.shape, x1_test.shape, y_train.shape)   # x1_train.shape: (70, 3), x1_test.shape: (30, 3), y_train.shape: (70,)
 
 #2. 모델구성
 from tensorflow.keras.models import Sequential, Model
@@ -34,10 +35,11 @@ dense14 = Dense(10, activation='relu', name='dense14')(dense13)
 output2 = Dense(12, name='output2')(dense14)  #히든레이어
 
 from tensorflow.keras.layers import concatenate, Concatenate
-merge1 = concatenate([output1,output2])
+merge1 = concatenate([output1,output2])   #연결만 한거임
+# merge1 = Concatenate([output1,output2])   # 수정하기!!!!!!!!!!!!!!!!!!!!!
 merge2 = Dense(10, name='merge2')(merge1)
 merge3 = Dense(5,activation='relu', name='merge3')(merge2)
-last_output = Dense(1)(merge3)
+last_output = Dense(1)(merge3)   #최종 output
 
 model = Model(inputs=[input1, input2], outputs=last_output)
 
@@ -48,12 +50,6 @@ model.compile(loss='mse', optimizer='adam', metrics=['mae'])
 model.fit([x1_train, x2_train], y_train, epochs=100, batch_size=8, verbose=1)
 
 #4. 평가, 예측
-loss = model.evaluate([x1_test, x2_test], y_test)
-ic(loss)
-
-y_pred = model.predict([x1_test, x2_test])
-
-from sklearn.metrics import r2_score
-r2 = r2_score(y_test, y_pred)
-ic(r2)
-
+results = model.evaluate([x1_test, x2_test], y_test)
+ic(results[0])   #mse
+ic(results[1])   #metrics['mae]
