@@ -24,8 +24,8 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, shuffle
 # ic(x_test)
 # ic(y_test)
 
-ic(x.shape, x_train.shape, x_test.shape)   # x.shape : (506, 13)   input_dim=13
-ic(y.shape, y_train.shape, y_test.shape)   # (506,)      output = 1(벡터가 1개니까)
+# ic(x.shape, x_train.shape, x_test.shape)   # x.shape : (506, 13)   input_dim=13
+# ic(y.shape, y_train.shape, y_test.shape)   # (506,)      output = 1(벡터가 1개니까)
 
 # ic(datasets.feature_names)
 # ic(datasets.DESCR)   # DESCR : 묘사하다
@@ -36,9 +36,9 @@ ic(y.shape, y_train.shape, y_test.shape)   # (506,)      output = 1(벡터가 1�
 model = Sequential()
 model.add(Dense(128, activation="relu", input_shape=(13,)))
 model.add(Dense(64, activation='relu'))
-model.add(Dense(34, activation='relu'))
+model.add(Dense(32, activation='relu'))
 model.add(Dense(16, activation='relu'))
-model.add(Dense(5, activation='relu'))
+model.add(Dense(4, activation='relu'))
 model.add(Dense(1))
 
 
