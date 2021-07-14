@@ -5,7 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 from icecream import ic
 import numpy as np
-# standardization : 표준정규분포에 맞춰서 scaler 함
+# standardization : 표준정규분포 에 맞춰서 scaler 함
+
 #1. 데이터
 datasets = load_boston()
 x = datasets.data
@@ -68,8 +69,8 @@ ic(r2)
 
 '''
 #5. 결과값
-ic| loss: 9.113372802734375
-ic| r2: 0.9099353076575671
+ic| loss: 8.887653350830078
+ic| r2: 0.9121660210468836
 '''
 
 

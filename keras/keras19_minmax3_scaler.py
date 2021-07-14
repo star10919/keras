@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 from icecream import ic
 import numpy as np
+# MinmaxScaler : 정규분포에 맞춰서 scaler 함
 
 #1. 데이터
 datasets = load_boston()
