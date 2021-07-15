@@ -55,6 +55,9 @@ results = model.evaluate(x_test, y_test)   # 무조건 낮을수록 좋다
 print('loss :', results[0])
 print('accuracy :', results[1])
 
+ic(y_test[-5:-1])
+y_predict = model.predict(x_test[-5:-1])
+ic(y_predict)   # sigmoid 통과한 값
 
 # 그래프 그리기
 plt.rcParams['font.family'] = 'gulim'
