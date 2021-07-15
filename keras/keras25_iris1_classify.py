@@ -80,3 +80,7 @@ y_predict = model.predict(x_test[:5])
 ic(y_predict)   # 소프트맥스 통과한 값
 
 
+'''
+loss : 0.03401293233036995
+accuracy : 1.0
+'''

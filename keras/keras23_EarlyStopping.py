@@ -26,10 +26,9 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, shuffle
 # ic(y_test)
 
 # (방법 4)
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, QuantileTransformer
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 # scaler = MinMaxScaler()
-# scaler = StandardScaler()
-scaler = QuantileTransformer()
+scaler = StandardScaler()
 scaler.fit(x_train)   ##1- 실행만 시킨거임   / train만을 fit 시켜서(전체 데이터로 minmaxscaler하면 과적합 됨)
 x_train = scaler.transform(x_train)   ##2- 변환(scaler됨)   / train 기준에 스케일된 걸로 test transfrom해줌
 x_test = scaler.transform(x_test)
@@ -104,8 +103,8 @@ plt.show()
 
 '''
 #5. 결과값
-loss : 0.007086889818310738
-accuracy : 0.9814814925193787
+ic| loss: 6.996442794799805
+ic| r2: 0.9308562809262234
 '''
 
 
