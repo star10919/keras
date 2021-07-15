@@ -13,7 +13,7 @@ datasets = load_breast_cancer()
 # ic(datasets.feature_names)
 
 x = datasets.data
-y = datasets.target
+y = datasets.target  #2진 분류(0 or 1)
 
 # ic(x.shape, y.shape)   #(569, 30), (569,)
 # ic(y[:40])  # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
@@ -38,11 +38,11 @@ model.add(Dense(32, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(16, activation='relu'))
 model.add(Dense(4, activation='relu'))
-model.add(Dense(1))
+model.add(Dense(1, activation='sigmoid'))  # sigmoid : 0과 1사이의 값  # 스칼라 569인 벡터 1개
 
 
 # 3. 컴파일, 훈련
-model.compile(loss='mse', optimizer='adam')
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])   # binary_crossentropy : 2진 분류   # metrics(결과에 반영X):평가지표
 
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='loss', patience=5, mode='min')
@@ -51,8 +51,9 @@ hist = model.fit(x_train, y_train, epochs=100, batch_size=1, callbacks=[es])
 
 
 # 4. 평가, 예측
-loss = model.evaluate(x_test, y_test)
-ic(loss)
+results = model.evaluate(x_test, y_test)   # 무조건 낮을수록 좋다
+print('loss :', results[0])
+print('accuracy :', results[1])
 
 
 # 그래프 그리기
@@ -64,3 +65,12 @@ plt.xlabel('epochs')
 plt.ylabel('loss')
 plt.legend('유방암 loss')
 plt.show()
+
+
+'''
+ic| loss: 0.013418859802186489
+
+
+loss : 0.41947320103645325
+accuracy : 0.9766082167625427
+'''
