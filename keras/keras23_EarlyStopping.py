@@ -52,14 +52,14 @@ model.add(Dense(32, activation='relu'))
 model.add(Dense(1))
 
 
-#3. 컴파일, 훈련
+#3. 컴파일(EarlyStopping), 훈련
 model.compile(loss='mse', optimizer='adam')
 
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='loss', patience=20, mode='min', verbose=1)   # patience=5  loss값이 5번이 지날때까지 참겠다.   # mode='min'  최솟값이 나올때까지
 # EarlyStopping은 verbose 안쓰는 경우가 더 많음  /  verbose=1 -> Epoch 00042: early stopping 추가
 
-hist = model.fit(x_train, y_train, epochs=1000, batch_size=5, validation_split=0.3, callbacks=[es])
+hist = model.fit(x_train, y_train, epochs=1000, batch_size=5, validation_split=0.3, callbacks=[es])   # 컴파일에 입력한거 callbacks파리미터 입력해서 적용시켜주기
 
 
 # ic(hist.history.keys())  # dict_keys(['loss', 'val_loss'])
@@ -87,8 +87,10 @@ y_predict = model.predict(x_test)
 r2 = r2_score(y_test, y_predict)
 ic(r2)
 
+
+# 그래프 그리기
 import matplotlib.pyplot as plt
-plt.rcParams['font.family'] = 'gulim'
+plt.rcParams['font.family'] = 'gulim'   # 한글 깨짐 방지
 plt.plot(hist.history['loss'])   # x:epoch / y:hist.history['loss']
 plt.plot(hist.history['val_loss'])
 
