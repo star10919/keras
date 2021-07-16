@@ -1,0 +1,1 @@
+from tensorflow.keras.datasets import cifar10   # 칼라  /  32, 32, 3

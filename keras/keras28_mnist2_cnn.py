@@ -14,13 +14,12 @@ x_train = x_train.reshape(60000, 28, 28, 1)   # reshape : 내용물과 순서는
 x_test = x_test.reshape(10000, 28, 28, 1)   # 컨벌루션은 무조건 4차원으로 만들어서 넣어줘야 함.
 
 ic(np.unique(y_train))   # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
+y_train = y_train.reshape(-1,1)
+y_test = y_test.reshape(-1,1)
 
 # #1-2. 데이터 전처리
 from sklearn.preprocessing import OneHotEncoder
 one = OneHotEncoder()
-y_train = y_train.reshape(-1,1)
-y_test = y_test.reshape(-1,1)
 one.fit(y_train)
 y_train = one.transform(y_train).toarray() # (60000, 10)
 y_test = one.transform(y_test).toarray() # (10000, 10)
@@ -40,7 +39,7 @@ model.add(Conv2D(16, (2,2), padding='same', activation='relu'))
 model.add(MaxPooling2D())
 model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
 model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
-model.add(MaxPooling2D())
+model.add(MaxPooling2D())   # 연산X
 model.add(Flatten())  # shape자체가 2차원이 됨(Dense써야 되니까-Dense:2차원)(연산은 안함)
 model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
@@ -69,6 +68,6 @@ print('accruacy :', results[1])
 
 
 '''
-category : 0.05768582224845886
-accruacy : 0.9890000224113464
+category : 0.04307371377944946
+accruacy : 0.9900000095367432
 '''
