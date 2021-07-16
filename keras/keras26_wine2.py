@@ -32,28 +32,36 @@ datasets = pd.read_csv('../_data/winequality-white.csv', sep=';',       # 경로
 #3 y의 라벨을 확인 np.unique(y)
 #5. y의 shape 확인 (4898,) -> (4898,7)
 
-datasets = datasets.to_numpy()
-x = datasets[:11]
-y = datasets[-1]
+
+datasets_np = datasets.to_numpy()   #1 판다스 -> 넘파이
+ic(datasets_np)
+x = datasets_np[:,0:11]
+ic(x)
+y = datasets_np[:,[-1]]
+ic(y)
 ic(x.shape, y.shape)   # x.shape: (4898, 11), y.shape: (4898,)
-ic(np.unique(y))   # 7개
+ic(np.unique(y))   # [3, 4, 5, 6, 7, 8, 9]
 
 # 원핫인코딩
-# from tensorflow.keras.utils import to_categorical
+# from tensorflow.keras.utils import to_categorical   # to_categorical 0, 1, 2 없으나 자동 생성
 # y = to_categorical(y)
 # ic(y)
 
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder    # 0, 1, 2 자동 채움 안됨
+from sklearn.impute import SimpleImputer
+imp = SimpleImputer()
 onehot = OneHotEncoder()
-ic(y)
+onehot.fit(y)
+y = onehot.transform(y).toarray() 
+ic(y.shape)    # (4898, 7)
 
 
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=9)
 
 # 데이터 전처리(scaler)
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
+from sklearn.preprocessing import StandardScaler, RobustScaler
+scaler = RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
@@ -63,13 +71,11 @@ x_test = scaler.transform(x_test)
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 model = Sequential()
-model.add(Dense(120, activation='relu', input_shape=(11,)))
-model.add(Dense(64, activation='relu'))
+model.add(Dense(128, activation='relu', input_shape=(11,)))
+model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
-model.add(Dense(4, activation='relu'))
 model.add(Dense(7, activation='softmax'))
 
 
@@ -77,9 +83,9 @@ model.add(Dense(7, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
+es = EarlyStopping(monitor='val_loss', patience=20, mode='min', verbose=1)
 
-model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_split=0.2, callbacks=[es])
+model.fit(x_train, y_train, epochs=1000, batch_size=10, validation_split=0.01, callbacks=[es])
 
 
 # 4. 평가, 예측
@@ -90,3 +96,9 @@ print('accuracy :', results[1])
 ic(y_test[-5:-1])
 y_predict = model.predict(x_test)
 ic(y_predict[-5:-1])
+
+
+'''
+loss : 1.4081991910934448
+accuracy : 0.5680271983146667
+'''
