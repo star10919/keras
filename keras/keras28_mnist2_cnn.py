@@ -15,7 +15,15 @@ x_test = x_test.reshape(10000, 28, 28, 1)   # 컨벌루션은 무조건 4차원�
 
 ic(np.unique(y_train))   # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-#1-2. 데이터 전처리
+
+# #1-2. 데이터 전처리
+from sklearn.preprocessing import OneHotEncoder
+one = OneHotEncoder()
+y_train = y_train.reshape(-1,1)
+y_test = y_test.reshape(-1,1)
+one.fit(y_train)
+y_train = one.transform(y_train).toarray() # (60000, 10)
+y_test = one.transform(y_test).toarray() # (10000, 10)
 
 
 
@@ -24,30 +32,40 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 
 model = Sequential()
-model.add(Conv2D(filters=100, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
+model.add(Conv2D(filters=30, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
 model.add(Conv2D(20, (2,2), activation='relu'))
-model.add(Conv2D(30, (2,2), padding='valid'))
-model.add(MaxPooling2D())   # 반으로 줄어듬(연산은 안함)
-model.add(Conv2D(15, (2,2)))
+model.add(Conv2D(60, (2,2), activation='relu'))
+model.add(Conv2D(50, (2,2), activation='relu'))
+model.add(Conv2D(40, (2,2), activation='relu'))
+model.add(MaxPooling2D())
 model.add(Flatten())  # shape자체가 2차원이 됨(Dense써야 되니까-Dense:2차원)(연산은 안함)
 model.add(Dense(64, activation='relu'))
-model.add(Dense(32))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(10, activation='softmax'))
+
+model.summary()
 
 
 # 3. 컴파일, 훈련           metrics['acc]
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
 
-model.fit(x_train, y_train, epochs=1000, batch_size=128, validation_split=0.024, callbacks=[es])
+model.fit(x_train, y_train, epochs=1000, batch_size=128, validation_split=0.0012, callbacks=[es])
 
 # 4. 평가, 예측             predict할 필요는 없다
 results = model.evaluate(x_test, y_test)
-print('binary :', results[0])
+print('category :', results[0])
 print('accruacy :', results[1])
 
 
 # acc로만 판단해보자.
 # 0.98 이상 완성
+
+
+'''
+category : 0.07703104615211487
+accruacy : 0.9879000186920166
+'''
