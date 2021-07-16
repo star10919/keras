@@ -32,16 +32,19 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
 
 model = Sequential()
-model.add(Conv2D(filters=30, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
-model.add(Conv2D(20, (2,2), activation='relu'))
-model.add(Conv2D(60, (2,2), activation='relu'))
-model.add(Conv2D(50, (2,2), activation='relu'))
-model.add(Conv2D(40, (2,2), activation='relu'))
+model.add(Conv2D(filters=32, kernel_size=(4,4), padding='same', input_shape=(28, 28, 1)))
+model.add(Conv2D(16, (4,4), padding='same', activation='relu'))
+model.add(Conv2D(16, (2,2), padding='same', activation='relu'))
+model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
+model.add(Conv2D(16, (2,2), padding='same', activation='relu'))
+model.add(MaxPooling2D())
+model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
+model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
 model.add(MaxPooling2D())
 model.add(Flatten())  # shape자체가 2차원이 됨(Dense써야 되니까-Dense:2차원)(연산은 안함)
+model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
 model.summary()
@@ -66,6 +69,6 @@ print('accruacy :', results[1])
 
 
 '''
-category : 0.07703104615211487
-accruacy : 0.9879000186920166
+category : 0.05768582224845886
+accruacy : 0.9890000224113464
 '''
