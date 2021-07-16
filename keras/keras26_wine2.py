@@ -10,7 +10,7 @@ from pandas.core.tools.datetimes import Scalar
 
 # 1. 데이터
 datasets = pd.read_csv('../_data/winequality-white.csv', sep=';',       # 경로잡기 중요!
-                        index_col=None, header=0)    #header=0 첫번째라인
+                        index_col=None, header=0)    #header=0 첫번째라인   # (4898,12)
 
     # * visual studio 기준(파이참이랑 다름)
 # ./  :  현재폴더(STUDY)
@@ -39,7 +39,7 @@ x = datasets_np[:,0:11]
 ic(x)
 y = datasets_np[:,[-1]]
 ic(y)
-ic(x.shape, y.shape)   # x.shape: (4898, 11), y.shape: (4898,)
+ic(x.shape, y.shape)   # x.shape: (4898, 11), y.shape: (4898,1)
 ic(np.unique(y))   # [3, 4, 5, 6, 7, 8, 9]
 
 # 원핫인코딩
@@ -71,11 +71,11 @@ x_test = scaler.transform(x_test)
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 model = Sequential()
-model.add(Dense(128, activation='relu', input_shape=(11,)))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
-model.add(Dense(32, activation='relu'))
-model.add(Dense(32, activation='relu'))
+model.add(Dense(240, activation='relu', input_shape=(11,)))
+model.add(Dense(240, activation='relu'))
+model.add(Dense(200, activation='relu'))
+model.add(Dense(124, activation='relu'))
+model.add(Dense(60, activation='relu'))
 model.add(Dense(7, activation='softmax'))
 
 
@@ -85,12 +85,12 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', patience=20, mode='min', verbose=1)
 
-model.fit(x_train, y_train, epochs=1000, batch_size=10, validation_split=0.01, callbacks=[es])
+model.fit(x_train, y_train, epochs=10000, batch_size=64, validation_split=0.0024, callbacks=[es])
 
 
 # 4. 평가, 예측
 results = model.evaluate(x_test, y_test)
-print('loss :', results[0])
+print('category :', results[0])
 print('accuracy :', results[1])
 
 ic(y_test[-5:-1])
