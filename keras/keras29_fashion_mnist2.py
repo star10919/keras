@@ -27,17 +27,18 @@ ic(y_train.shape, y_test.shape)
 
 #2. 모델 구성
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
 model = Sequential()
-model.add(Conv2D(128, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
+model.add(Conv2D(32, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
+model.add(Conv2D(64, (3,3), padding='same', activation='relu'))
 model.add(Conv2D(64, (2,2), padding='same', activation='relu'))
-model.add(Conv2D(64, (4,4), padding='same', activation='relu'))
 model.add(Conv2D(32, (4,4), padding='same', activation='relu'))
-model.add(Conv2D(16, (4,4), padding='same', activation='relu'))
-model.add(MaxPooling2D())
+model.add(Conv2D(32, (2,2), activation='relu'))
+model.add(MaxPool2D())
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
+model.add(Dense(256, activation='relu'))
+model.add(Dense(100, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
@@ -59,5 +60,6 @@ print('category :', results[0])
 print('accuracy', results[1])
 
 '''
-
+category : 0.42756807804107666
+accuracy 0.91839998960495
 '''

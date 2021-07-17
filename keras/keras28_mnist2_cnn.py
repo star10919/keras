@@ -28,7 +28,7 @@ y_test = one.transform(y_test).toarray() # (10000, 10)
 
 # 2. 모델 구성
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Flatten
+from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
 
 model = Sequential()
 model.add(Conv2D(filters=32, kernel_size=(4,4), padding='same', input_shape=(28, 28, 1)))
@@ -36,10 +36,10 @@ model.add(Conv2D(16, (4,4), padding='same', activation='relu'))
 model.add(Conv2D(16, (2,2), padding='same', activation='relu'))
 model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
 model.add(Conv2D(16, (2,2), padding='same', activation='relu'))
-model.add(MaxPooling2D())
+model.add(MaxPool2D())
 model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
 model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
-model.add(MaxPooling2D())   # 연산X
+model.add(MaxPool2D())   # 연산X
 model.add(Flatten())  # shape자체가 2차원이 됨(Dense써야 되니까-Dense:2차원)(연산은 안함)
 model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
