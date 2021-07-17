@@ -23,7 +23,7 @@ one = OneHotEncoder()
 one.fit(y_train)
 y_train = one.transform(y_train).toarray() # (60000, 10)
 y_test = one.transform(y_test).toarray() # (10000, 10)
-
+# ic(y_train.shape, y_test.shape)
 
 
 # 2. 모델 구성
