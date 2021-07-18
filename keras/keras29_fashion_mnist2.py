@@ -57,9 +57,9 @@ model.fit(x_train, y_train, epochs=1000, batch_size=128, validation_split=0.012,
 #4. 평가, 예측
 results = model.evaluate(x_test, y_test)
 print('category :', results[0])
-print('accuracy', results[1])
+print('accuracy :', results[1])
 
 '''
 category : 0.42756807804107666
-accuracy 0.91839998960495
+accuracy : 0.91839998960495
 '''
