@@ -4,9 +4,10 @@ from tensorflow.keras.layers import Dense, Input
 import matplotlib.pyplot as plt
 from icecream import ic
 
-
+# 과제 2
 # 함수형으로 리폼하시오
 # 서머리로 확인
+# R2를 0.9까지로 올려라!!!
 
 #1.데이터
 x = np.array([1, 2, 3, 4, 5])
@@ -22,6 +23,7 @@ dense5 = Dense(36)(dense4)
 dense5 = Dense(15)(dense4)
 output1 = Dense(1)(dense4)
 model = Model(inputs=input1, outputs=output1)
+
 model.summary()
 
 
@@ -54,8 +56,5 @@ print('loss:', loss)
 y_predict = model.predict(x)
 from sklearn.metrics import r2_score
 r2 = r2_score(y, y_predict)  # y_test와 y_predict값을 통해 결정계수를 계산
-print('R2 스코어 : ', r2)
-
-# 과제 2
-# R2를 0.9까지로 올려라!!!
+print('R2 스코어 :', r2)
 

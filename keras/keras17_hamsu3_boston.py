@@ -34,6 +34,7 @@ dense7 = Dense(4)(dense6)
 dense8 = Dense(3)(dense7)
 output1 = Dense(1)(dense8)
 model = Model(inputs=input1, outputs=output1)
+
 model.summary()
 
 # model = Sequential()

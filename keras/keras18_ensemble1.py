@@ -1,6 +1,8 @@
 import numpy as np
 from icecream import ic
 
+### concatenate(메소드), Concatenate(클래스) - 앙상블((함수형)모델 합치기)
+
 #1. 데이터
 x1 = np.array([range(100), range(301, 401), range(1,101)])
 x2 = np.array([range(101, 201), range(411, 511), range(100, 200)])

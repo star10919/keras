@@ -1,6 +1,8 @@
 import numpy as np
 from icecream import ic
 
+### 함수형 모델
+
 #1. 데이터
 x = np.array([range(100), range(301, 401), range(1, 101), range(100), range(401, 501)])
 x = np.transpose(x)

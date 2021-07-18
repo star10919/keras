@@ -8,6 +8,11 @@ from icecream import ic
 
 ic(x_train.shape, y_train.shape)   # (50000, 32, 32, 3), (50000, 1)
 ic(x_test.shape, y_test.shape)     # (10000, 32, 32, 3), (10000, 1)
+ic(np.max(x_train), np.max(x_test))  # 255
+
+x_train = x_train/255.
+x_test = x_test/255.
+
 
 ic(np.unique(y_train))   # 100개
 y_train = y_train.reshape(-1,1)
@@ -49,7 +54,7 @@ model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics='acc')
 
 from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='val_loss', mode='auto', patience=5, verbose=1)
+es = EarlyStopping(monitor='val_loss', mode='auto', patience=20, verbose=1)
 
 model.fit(x_train, y_train, epochs=1000, batch_size=200, validation_split=0.002, callbacks=[es])
 

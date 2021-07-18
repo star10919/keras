@@ -1,5 +1,6 @@
 import numpy as np
 from icecream import ic
+
 # 소스 완성(input모델 1 -> output모델 2)
 
 #1. 데이터
@@ -47,8 +48,8 @@ model.summary()
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
-model.fit(x1_train, [y1_train,y2_train], epochs=100, batch_size=8, verbose=1)
+model.fit(x1_train, [y1_train, y2_train], epochs=100, batch_size=8, verbose=1)
 
 #4. 평가, 예측
-results = model.evaluate(x1_test, [y1_test,y2_test])
+results = model.evaluate(x1_test, [y1_test, y2_test])
 ic(results)
