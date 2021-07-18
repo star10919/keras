@@ -14,7 +14,7 @@ model.add(Dense(1, input_dim=1))  #Dense(output(y) - Output node 2개, input(x)_
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')  # 모델이 알아먹도록 compile! # mse방식으로 로스를 줄이겠다!  #optimizer='adam  평타85%로 나옴
 
-model.fit(x, y, epochs=500, batch_size=1)  # 훈련시키겠다!  # epochs=1 : 훈련1번시키겠다  # batch_size=1 : 원소 1개씩 넣어서 훈련시키겠다.
+model.fit(x, y, epochs=500, batch_size=1)  # 훈련시키겠다!  # epochs=500 : 훈련500번시키겠다  # batch_size=1 : 원소 1개씩 넣어서 훈련시키겠다.
 
 #4. 평가, 예측
 loss = model.evaluate(x, y) # loss='mse' 값이 반환됨 # 원래는 데이터와 다른 값을 넣어서 평가함

@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 x = np.array([[1,2,3,4,5,6,7,8,9,10], [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.5, 1.4, 1.3]])  # 2행 10열
 y = np.array([11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
 print(x.shape)   #(2, 10)
-print(y.shape)   #(10,) = 1행 10열
+print(y.shape)   #(10,) = 스칼라 10개
 
 #1-2. 2행 10열을   10행 2열로 바꿔라
 x = np.transpose(x)

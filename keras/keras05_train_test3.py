@@ -3,7 +3,9 @@ from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
 import random
-# import icecream as ic
+import icecream as ic
+
+### train_test_split 사용
 
 #1. 데이터
 x = np.array(range(100))   #0~99  100개
@@ -18,8 +20,8 @@ y = np.array(range(1, 101))   #1~100   100개
 # print(x_test.shape, y_test.shape)   # (30,) (30,)
 
 
-# 무작위 추출로 train, test set 분할  -  train_test_split사용(shuffle=True(디폴트) 난수 설정)  /  random_state(가급적이면 써줘라) <= 난수표 적용
-from sklearn.model_selection import train_test_split   # 무조건 사이킷런 쓰기(아주 좋음)
+# 무작위 추출로 train, test set 분할  -  train_test_split사용(shuffle=True(디폴트) : 난수 설정)  /  random_state(가급적이면 써줘라) <= 난수표 적용
+from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, shuffle=True, random_state=66)
 print(x_test)
 print(y_test)

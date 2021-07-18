@@ -6,7 +6,7 @@
 # 6. 히든레이어의 노드는 10개 이상 1000개 이하
 # 7. train 70%, test 30%  // test로 r2뽑기
 
-# => r2 score 의도적으로 낮춰라
+### r2 score 의도적으로 낮춰라
 
 import numpy as np
 from tensorflow.keras.models import Sequential
@@ -47,7 +47,7 @@ print('100의 예측값 : ', y_predict)
 # R2 결정 계수 : 정확도와 유사한 지표
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict)  # y_test와 y_predict값을 통해 결정계수를 계산
-print('R2 스코어 : ', r2)
+print('R2 스코어 :', r2)
 
 '''
 #5. 결정값

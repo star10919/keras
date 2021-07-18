@@ -29,16 +29,16 @@ ic(y_train.shape, y_test.shape)
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
-model.add(Conv2D(64, (3,3), padding='same', activation='relu'))
+model.add(Conv2D(128, kernel_size=(2,2), padding='same', activation='relu', input_shape=(28, 28, 1)))
+model.add(Conv2D(128, (2,2), padding='same', activation='relu'))
+model.add(MaxPool2D())
+model.add(Conv2D(128, (2,2), padding='same', activation='relu'))
 model.add(Conv2D(64, (2,2), padding='same', activation='relu'))
-model.add(Conv2D(32, (4,4), padding='same', activation='relu'))
-model.add(Conv2D(32, (2,2), activation='relu'))
+model.add(Conv2D(100, (2,2), padding='same', activation='relu'))
 model.add(MaxPool2D())
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
-model.add(Dense(256, activation='relu'))
-model.add(Dense(100, activation='relu'))
+model.add(Dense(128, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(10, activation='softmax'))
 
@@ -49,9 +49,9 @@ model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='val_loss', patience=10, mode='auto', verbose=1)
+es = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
 
-model.fit(x_train, y_train, epochs=1000, batch_size=128, validation_split=0.012, callbacks=[es])
+model.fit(x_train, y_train, epochs=1000, batch_size=100, validation_split=0.012, callbacks=[es])
 
 
 #4. 평가, 예측

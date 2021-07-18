@@ -3,6 +3,8 @@ from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
 
+### 딥러닝
+
 #1. 데이터
 x = np.array([1,2,3,4,5])
 y = np.array([1,2,4,3,5]) 

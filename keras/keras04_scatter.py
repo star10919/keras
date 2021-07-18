@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #1. 데이터
-x = np.array([1,2,3,4,5,6,7,8,9,10])
-y = np.array([1,2,4,3,5,7,9,3,8,12]) 
+x = np.array([1,2,3,4,5,6,7,8,9,10])   # 10스칼라(=1벡터)
+y = np.array([1,2,4,3,5,7,9,3,8,12])   # 10스칼라(=1벡터)
 
 #2. 모델구성(딥러닝 구현)
 model = Sequential()

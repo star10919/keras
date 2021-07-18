@@ -4,11 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #1-1. 데이터
-x = np.array([range(10), range(21,31), range(201,211)])   # (3,10)    # range(10) : 0~9  / range(21,31) : 21~30  / range(201,211) : 201~210
+x = np.array([range(10), range(21,31), range(201,211)])   # (3,10)    # range(10):0~9 / range(21,31):21~30  / range(201,211):201~210
 x = np.transpose(x)  # (10,3)
 
 y = np.array([[1,2,3,4,5,6,7,8,9,10],[1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.5, 1.4, 1.3],[10,9,8,7,6,5,4,3,2,1]])  # (3,10)
-y = np.transpose(y)   # (10,3)
+y = np.transpose(y)  # (10,3)
 
 #2. 모델구성
 model = Sequential()
@@ -30,7 +30,7 @@ model.fit(x, y, epochs=2500, batch_size=1)
 loss = model.evaluate(x, y)
 print('loss :', loss)
  
-result = model.predict([[10, 21, 201]])   # (1,3)
+result = model.predict([[10, 21, 201]])
 print('0, 21, 201의 예측값 :', result)
 
 
