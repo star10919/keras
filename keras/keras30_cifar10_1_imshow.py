@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from icecream import ic
 
+### 컬러(a, b, c, 3)
+
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
 ic(x_train.shape, y_train.shape)   # (50000, 32, 32, 3), (50000, 1)

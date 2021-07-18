@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
 from icecream import ic
 
+### 흑백(a, b, c, 1)
+
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 ic(x_train.shape, y_train.shape)   # x_train.shape: (60000, 28, 28), y_train.shape: (60000,)

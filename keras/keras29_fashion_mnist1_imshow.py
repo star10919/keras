@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from icecream import ic
 
+### 흑백
+
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 
 print(x_train.shape, y_train.shape)   # (60000, 28, 28) (60000,)

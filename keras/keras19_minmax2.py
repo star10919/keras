@@ -6,6 +6,8 @@ from sklearn.metrics import r2_score
 from icecream import ic
 import numpy as np
 
+### x 데이터 전처리 : MinMaxScaler 사용
+
 #1. 데이터
 datasets = load_boston()
 x = datasets.data
@@ -30,6 +32,7 @@ x_scale = scaler.transform(x)   ##2- 변환(scaler됨)   / train 기준에 스�
 x_train, x_test, y_train, y_test = train_test_split(x_scale, y, test_size=0.3, shuffle=True, random_state=9)
 # ic(x_test)
 # ic(y_test)
+
 
 ic(x.shape, x_train.shape, x_test.shape)   # x.shape : (506, 13)   input_dim=13
 ic(y.shape, y_train.shape, y_test.shape)   # (506,)      output = 1(벡터가 1개니까)

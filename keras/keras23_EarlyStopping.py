@@ -6,6 +6,9 @@ from sklearn.metrics import r2_score
 from icecream import ic
 import numpy as np
 from tensorflow.python.ops.gen_dataset_ops import batch_dataset
+
+### EarlyStopping
+
 # standardization : 표준정규분포 에 맞춰서 scaler 함
 
 #1. 데이터

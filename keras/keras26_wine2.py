@@ -12,24 +12,24 @@ from pandas.core.tools.datetimes import Scalar
 datasets = pd.read_csv('../_data/winequality-white.csv', sep=';',       # 경로잡기 중요!
                         index_col=None, header=0)    #header=0 첫번째라인   # (4898,12)
 
-    # * visual studio 기준(파이참이랑 다름)
-# ./  :  현재폴더(STUDY)
-# ../ :  상위폴더
+# * visual studio 기준(파이참이랑 다름)
+    # ./  :  현재폴더(STUDY)
+    # ../ :  상위폴더
 
 # print(datasets)   # quality 가  y
 
-    # 아래 3개는 꼭 찍어보기
-# ic(datasets.shape)   # (4898, 12)   => x:(4898,11),   y:(4898,) 으로 잘라주기
-# ic(datasets.info())
-# ic(datasets.describe())
+# 아래 3개는 꼭 찍어보기
+    # ic(datasets.shape)   # (4898, 12)   => x:(4898,11),   y:(4898,) 으로 잘라주기
+    # ic(datasets.info())
+    # ic(datasets.describe())
 
 
 
 
 #1 판다스 -> 넘파이 : index와 header가 날아감
 #2 x와 y를 분리
-#3. sklearn의 onehot??? 사용할것
-#3 y의 라벨을 확인 np.unique(y)
+#3. sklearn의 OneHotEncoder 사용할것
+#3 y의 라벨을 확인 np.unique(y) <= Output node 개수 잡아주기 위해서
 #5. y의 shape 확인 (4898,) -> (4898,7)
 
 
@@ -40,16 +40,15 @@ ic(x)
 y = datasets_np[:,[-1]]
 ic(y)
 ic(x.shape, y.shape)   # x.shape: (4898, 11), y.shape: (4898,1)
-ic(np.unique(y))   # [3, 4, 5, 6, 7, 8, 9]
+ic(np.unique(y))   # [3, 4, 5, 6, 7, 8, 9]  -  7개
 
+# y 데이터 전처리
 # 원핫인코딩
 # from tensorflow.keras.utils import to_categorical   # to_categorical 0, 1, 2 없으나 자동 생성
 # y = to_categorical(y)
 # ic(y)
 
-from sklearn.preprocessing import OneHotEncoder    # 0, 1, 2 자동 채움 안됨
-from sklearn.impute import SimpleImputer
-imp = SimpleImputer()
+from sklearn.preprocessing import OneHotEncoder    # 0, 1, 2 자동 채움 안됨 / # to_categorical 0, 1, 2 없으나 자동 생성
 onehot = OneHotEncoder()
 onehot.fit(y)
 y = onehot.transform(y).toarray() 
@@ -57,9 +56,9 @@ ic(y.shape)    # (4898, 7)
 
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=9)
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.995, shuffle=True, random_state=24)
 
-# 데이터 전처리(scaler)
+# x 데이터 전처리(scaler)
 from sklearn.preprocessing import StandardScaler, RobustScaler
 scaler = RobustScaler()
 scaler.fit(x_train)
@@ -99,6 +98,6 @@ ic(y_predict[-5:-1])
 
 
 '''
-loss : 1.4081991910934448
-accuracy : 0.5680271983146667
+category : 0.9682848453521729
+accuracy : 0.800000011920929
 '''

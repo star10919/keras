@@ -3,7 +3,9 @@ from sklearn.datasets import load_iris
 from icecream import ic
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-# 다중 분류 (0,1,2를 명목척도로 바꿔줘야 함 <- 원핫인코딩 사용(to_categorical))
+
+### 다중 분류 (0,1,2를 명목척도로 바꿔줘야 함 <- 원핫인코딩 사용(to_categorical))
+### Output activation = 'softmax', 컴파일 loss = 'categorical_crossentropy'
 
 datasets = load_iris()
 print(datasets.DESCR)

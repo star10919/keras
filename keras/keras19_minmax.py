@@ -6,6 +6,8 @@ from sklearn.metrics import r2_score
 from icecream import ic
 import numpy as np
 
+### x 데이터 전처리 : x 를 max로 나누기
+
 #1. 데이터
 datasets = load_boston()
 x = datasets.data
