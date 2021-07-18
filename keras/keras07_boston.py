@@ -5,6 +5,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 from icecream import ic
 
+
+### train_test_split(70%) 사용    /   loss 값, r2(0.7정도는 넘기기) 값 출력
+
 #1. 데이터
 datasets = load_boston()
 x = datasets.data
@@ -20,7 +23,6 @@ ic(y.shape, y_train.shape, y_test.shape)   # (506,)      output = 1(벡터가 1�
 # ic(datasets.feature_names)
 # ic(datasets.DESCR)   # DESCR : 묘사하다
 
-# train_test_split(70%) 사용,       loss 값, r2(0.7정도는 넘기기) 값 출력
 
 #2. 모델
 model = Sequential()

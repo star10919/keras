@@ -12,7 +12,7 @@ x_train = x[:7]   # 훈련, 공부
 y_train = y[:7]
 x_test = x[7:10]  # 평가 데이터(30%)
 y_test = y[7:10]
-x_val = x[-3:]   # 문제집풀기
+x_val = x[-3:]   # 시험 보기 전에 문제집풀기
 y_val = y[-3:]
 
 # ic(x_train.shape)  # (7,)
@@ -36,7 +36,7 @@ model.compile(loss='mse', optimizer='adam')
 
 model.fit(x_train, y_train, epochs=1000, batch_size=1, validation_data=(x_val, y_val))  #통상적으로 loss가 val_loss 보다 좋게 나옴(=> 더 안 좋은 val_loss에 기준을 맞춰서 하파튜해야 함)
 
-#4. 평가, 예측(훈련데이터와 평가데이터는 같으면 안됨)
+#4. 평가, 예측(훈련데이터와 평가데이터는 같으면 안 됨)
 loss = model.evaluate(x_test, y_test)
 print('loss: ', loss)
 
