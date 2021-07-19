@@ -32,20 +32,19 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
 
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(2,2), padding='same', input_shape=(32,32,3), activation='relu'))
-model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
-model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
+model.add(Conv2D(102, kernel_size=(2,2), padding='same', input_shape=(32,32,3), activation='relu'))
+model.add(Conv2D(64, (2,2), padding='same', activation='relu'))
+model.add(Conv2D(128, (2,2), padding='same', activation='relu'))
 model.add(MaxPool2D())
 model.add(Conv2D(64, (2,2), padding='same', activation='relu'))
 # model.add(Conv2D(32, (2,2), padding='same', activation='relu'))
-# model.add(Conv2D(64, (2,2), padding='same', activation='relu'))
+model.add(Conv2D(64, (2,2), padding='same', activation='relu'))
 model.add(MaxPool2D())
 model.add(Flatten())
 model.add(Dense(1024, activation='relu'))
 model.add(Dense(512, activation='relu'))
-model.add(Dense(512, activation='relu'))
 model.add(Dense(256, activation='relu'))
-# model.add(Dense(128, activation='relu'))
+model.add(Dense(128, activation='relu'))
 model.add(Dense(100, activation='softmax'))
 
 model.summary()
@@ -55,9 +54,9 @@ model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics='acc')
 
 from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='val_loss', mode='min', patience=2, verbose=1)
+es = EarlyStopping(monitor='val_loss', mode='min', patience=10, verbose=1)
 
-model.fit(x_train, y_train, epochs=20, batch_size=600, validation_split=0.0025, callbacks=[es])
+model.fit(x_train, y_train, epochs=1000, batch_size=300, validation_split=0.0025, callbacks=[es])
 
 
 # 4. 평가, 예측
@@ -74,4 +73,8 @@ accuracy : 0.3944999873638153
 epoch 20/ batch 600/ patience 2/ val_spl 0.0025
 category : 2.6021106243133545
 accuracy : 0.40959998965263367
+
+model 수정
+category : 2.4821901321411133
+accuracy : 0.39809998869895935
 '''
