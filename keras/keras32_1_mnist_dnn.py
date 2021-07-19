@@ -61,6 +61,7 @@ model.add(Dense(10, activation='softmax'))
 # model.add(Conv2D(64, (2, 2), padding='valid', activation='relu'))
 # model.add(Conv2D(32, (2, 2), padding='valid', activation='relu'))
 # model.add(GlobalAveragePooling2D())
+# model.add(Flatten())
 # model.add(Dense(10, activation='softmax'))
 # model.summary()
 
@@ -96,7 +97,7 @@ dnn
 걸린시간 : 67.98393535614014
 category : 0.10037190467119217
 
-cnn
+cnn + Flatten
 
 
 cnn + GlobalAveragePooling

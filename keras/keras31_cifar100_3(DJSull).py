@@ -87,10 +87,10 @@ print('acc :', results[1])
 
 #plt 시각화
 import matplotlib.pyplot as plt
-plt.figure(figsize=(9,5))
+plt.figure(figsize=(9,5))   # figure : 판 깔겠다.
 
 # 1
-plt.subplot(2,1,1)
+plt.subplot(2,1,1)   # subplot : 그림 2개 그리겠다.
 plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
 plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
 plt.grid()
