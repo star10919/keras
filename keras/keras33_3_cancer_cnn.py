@@ -33,12 +33,6 @@ x_test = scaler.transform(x_test)
 x_train = x_train.reshape(398, 30, 1, 1)
 x_test = x_test.reshape(171, 30, 1, 1)
 
-# 1-3. y 데이터 전처리
-# from tensorflow.keras.utils import to_categorical
-# y_train = to_categorical(y_train)
-# y_test = to_categorical(y_test)
-# ic(y_train.shape, y_test.shape)   #  y_train.shape: (398, 2), y_test.shape: (171, 2)
-
 
 # 2. 모델
 model = Sequential()
@@ -46,7 +40,8 @@ model.add(Conv2D(128, kernel_size=(1,1), input_shape=(30,1,1), activation='relu'
 model.add(Conv2D(64, (1,1), activation='relu'))
 model.add(Conv2D(64, (1,1), activation='relu'))
 model.add(Conv2D(64, (1,1), activation='relu'))
-model.add(GlobalAveragePooling2D())
+# model.add(GlobalAveragePooling2D())
+model.add(Flatten())
 model.add(Dense(1, activation='sigmoid'))  # sigmoid : 0과 1사이의 값  # 스칼라 569인 벡터 1개
 
 
@@ -73,7 +68,7 @@ print('accuracy :', results[1])
 
 ic(y_test[-5:-1])
 y_predict = model.predict(x_test[-5:-1])
-ic(y_predict)   # sigmoid 통과한 값
+# ic(y_predict)  # sigmoid 통과한 값
 
 # 그래프 그리기
 plt.rcParams['font.family'] = 'gulim'
@@ -93,7 +88,13 @@ ic| loss: 0.013418859802186489
 loss : 0.41947320103645325
 accuracy : 0.9766082167625427
 
+*cnn + Flatten
+걸린시간 : 55.207491874694824
+loss : 0.0763908177614212
+accuracy : 0.9707602262496948
 
 *cnn + GAP
-
+걸린시간 : 34.21939539909363
+loss : 0.2451203167438507
+accuracy : 0.9122806787490845
 '''
