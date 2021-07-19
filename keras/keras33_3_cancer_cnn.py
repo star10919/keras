@@ -34,10 +34,10 @@ x_train = x_train.reshape(398, 30, 1, 1)
 x_test = x_test.reshape(171, 30, 1, 1)
 
 # 1-3. y 데이터 전처리
-from tensorflow.keras.utils import to_categorical
-y_train = to_categorical(y_train)
-y_test = to_categorical(y_test)
-ic(y_train.shape, y_test.shape)   #  y_train.shape: (398, 2), y_test.shape: (171, 2)
+# from tensorflow.keras.utils import to_categorical
+# y_train = to_categorical(y_train)
+# y_test = to_categorical(y_test)
+# ic(y_train.shape, y_test.shape)   #  y_train.shape: (398, 2), y_test.shape: (171, 2)
 
 
 # 2. 모델
@@ -45,7 +45,7 @@ model = Sequential()
 model.add(Conv2D(128, kernel_size=(1,1), input_shape=(30,1,1), activation='relu'))
 model.add(Conv2D(64, (1,1), activation='relu'))
 model.add(Conv2D(64, (1,1), activation='relu'))
-model.add(Conv2D(64, (1,2), activation='relu'))
+model.add(Conv2D(64, (1,1), activation='relu'))
 model.add(GlobalAveragePooling2D())
 model.add(Dense(1, activation='sigmoid'))  # sigmoid : 0과 1사이의 값  # 스칼라 569인 벡터 1개
 
