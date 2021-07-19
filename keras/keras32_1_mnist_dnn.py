@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
 from icecream import ic
 
+### cnn -> dnn
 ### dnn(Dense, 2차원)이 cnn(Convolution, 4차원) 보다 연산량이 훨씬 적음
 # DNN 구해서 CNN 과 비교
 # CNN + GlobalAveragePooling 구해서 CNN 과 비교
@@ -21,11 +22,11 @@ ic(np.unique(y_train))   # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 y_train = y_train.reshape(-1,1)
 y_test = y_test.reshape(-1,1)
 
-# 1-2. x 데이터 전처리
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-x_train = scaler.fit_transform(x_train)
-x_test = scaler.transform(x_test)
+# # 1-2. x 데이터 전처리
+# from sklearn.preprocessing import StandardScaler
+# scaler = StandardScaler()
+# x_train = scaler.fit_transform(x_train)
+# x_test = scaler.transform(x_test)
 
 # 1-3. y 데이터 전처리
 from sklearn.preprocessing import OneHotEncoder
@@ -42,27 +43,26 @@ from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten, GlobalAve
 
 model = Sequential()
 # dnn
-# model.add(Dense(100, input_shape=(28 * 28,)))
-# model.add(Dense(128, activation='relu'))
-# model.add(Dropout(0.2))
-# model.add(Dense(128, activation='relu'))
-# model.add(Dense(64, activation='relu'))
-# model.add(Dropout(0.2))
-# model.add(Dense(64, activation='relu'))
-# model.add(Dense(32, activation='relu'))
-# model.add(Dense(10, activation='softmax'))
+model.add(Dense(100, input_shape=(28 * 28,)))
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.2))
+model.add(Dense(128, activation='relu'))
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.2))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(10, activation='softmax'))
 
 # cnn
-model.add(Conv2D(filters=100, kernel_size=(4,4), padding='same', input_shape=(28, 28, 1)))
-model.add(Conv2D(128, (2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(128, (2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(64, (2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(64, (2, 2), padding='valid', activation='relu'))
-model.add(Conv2D(32, (2, 2), padding='valid', activation='relu'))
-model.add(Flatten())
-model.add(GlobalAveragePooling1D())
-model.add(Dense(10, activation='softmax'))
-model.summary()
+# model.add(Conv2D(filters=100, kernel_size=(4,4), padding='same', input_shape=(28, 28, 1)))
+# model.add(Conv2D(128, (2, 2), padding='valid', activation='relu'))
+# model.add(Conv2D(128, (2, 2), padding='valid', activation='relu'))
+# model.add(Conv2D(64, (2, 2), padding='valid', activation='relu'))
+# model.add(Conv2D(64, (2, 2), padding='valid', activation='relu'))
+# model.add(Conv2D(32, (2, 2), padding='valid', activation='relu'))
+# model.add(GlobalAveragePooling2D())
+# model.add(Dense(10, activation='softmax'))
+# model.summary()
 
 
 # 3. 컴파일, 훈련           metrics['acc]
@@ -71,10 +71,14 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
 
+import time
+start = time.time()
 model.fit(x_train, y_train, epochs=1000, batch_size=128, validation_split=0.0012, callbacks=[es])
+end = time.time() - start
 
 # 4. 평가, 예측             predict할 필요는 없다
 results = model.evaluate(x_test, y_test)
+print('걸린시간 :', end)
 print('category :', results[0])
 print('accruacy :', results[1])
 
@@ -89,12 +93,13 @@ accruacy : 0.9900000095367432
 
 
 dnn
-category : 0.10670371353626251
-accruacy : 0.9728999733924866
+걸린시간 : 67.98393535614014
+category : 0.10037190467119217
 
 cnn
 
 
 cnn + GlobalAveragePooling
-
+category : 0.06292704492807388
+accruacy : 0.9890999794006348
 '''
