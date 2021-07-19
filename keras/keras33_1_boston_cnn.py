@@ -15,7 +15,7 @@ datasets = load_boston()
 x = datasets.data
 y = datasets.target
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, shuffle=True, random_state=66)
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=66)
 # ic(x_test)
 # ic(y_test)
 
@@ -27,19 +27,24 @@ from sklearn.preprocessing import StandardScaler, PowerTransformer
 scaler = PowerTransformer()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
-x_train = x_train.reshape(404, 13, 1, 1)
-x_test = x_test.reshape(102, 13, 1, 1)
+
+ic(x_train.shape, x_test.shape)   # x_train.shape: (354, 13), x_test.shape: (152, 13)
+x_train = x_train.reshape(354, 13, 1, 1)
+x_test = x_test.reshape(152, 13, 1, 1)
+
 
 
 #2. 모델
 model = Sequential()
-model.add(Conv2D(128, kernel_size=2, padding='valid', input_shape=(13, 1, 1), activation='relu'))
-model.add(Conv2D(128, 2, padding='same', activation='relu'))
-model.add(Dropout(0.2))
-model.add(Conv2D(128, 2, padding='valid', activation='relu'))
-model.add(Dropout(0.2))
-model.add(Conv2D(64, 2, padding='valid', activation='relu'))
-model.add(GlobalAveragePooling2D())
+model.add(Conv2D(128, kernel_size=(1,1), padding='valid', input_shape=(13, 1, 1), activation='relu'))
+model.add(Conv2D(128, (1,1), padding='same', activation='relu'))
+model.add(Conv2D(128, (1,1), padding='valid', activation='relu'))
+model.add(Conv2D(64, (1,1), padding='valid', activation='relu'))
+model.add(Conv2D(64, (1,1), padding='valid', activation='relu'))
+model.add(Conv2D(32, (1,1), padding='valid', activation='relu'))
+model.add(Conv2D(16, (1,1), padding='valid', activation='relu'))
+model.add(Flatten())
+# model.add(GlobalAveragePooling2D())
 model.add(Dense(1))
 
 
@@ -56,8 +61,9 @@ end = time.time() - start
 
 
 #4. 평가, 예측, r2결정계수
-results = model.evaluate(x_test, y_test)
-print('loss :', results[0])
+loss = model.evaluate(x_test, y_test)
+print("걸린시간 :", end)
+ic(loss)
 
 y_predict = model.predict(x_test)
 # ic(y_predict)
@@ -83,10 +89,12 @@ ic| r2: 0.9328639728985081
 ic| loss: 5.507851600646973
 ic| r2: 0.934103159310994
 
-#cnn
-
+#cnn + Flatten
+ic| loss: 12.241085052490234
+ic| r2: 0.8518335236309844
 
 #cnn + GlobalAveragePooling
-
+ic| loss: 65.37923431396484
+ic| r2: 0.20864773914491164
 '''
 
