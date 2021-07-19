@@ -42,13 +42,10 @@ ic(y_train.shape, y_test.shape)   #  y_train.shape: (398, 2), y_test.shape: (171
 
 # 2. 모델
 model = Sequential()
-model.add(Conv2D(120, kernel_size=(1,1), padding='same', input_shape=(30,1,1), activation='relu'))
-model.add(Conv2D(64, (1,1), padding='same', activation='relu'))
-model.add(Conv2D(64, (1,1), padding='same', activation='relu'))
-model.add(Conv2D(32, (1,1), padding='same', activation='relu'))
-model.add(Conv2D(32, (1,1), padding='same', activation='relu'))
-model.add(Conv2D(16, (1,1), padding='same', activation='relu'))
-model.add(Conv2D(4, (1,1), padding='same', activation='relu'))
+model.add(Conv2D(128, kernel_size=(1,1), input_shape=(30,1,1), activation='relu'))
+model.add(Conv2D(64, (1,1), activation='relu'))
+model.add(Conv2D(64, (1,1), activation='relu'))
+model.add(Conv2D(64, (1,2), activation='relu'))
 model.add(GlobalAveragePooling2D())
 model.add(Dense(1, activation='sigmoid'))  # sigmoid : 0과 1사이의 값  # 스칼라 569인 벡터 1개
 
@@ -58,6 +55,9 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='loss', patience=5, mode='min')
+
+print('************************')
+ic(x_train.shape, x_test.shape)
 
 import time
 start = time.time()
