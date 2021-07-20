@@ -3,7 +3,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, SimpleRNN
 from icecream import ic
 
-### RNN - 3차원으로 들어가서 2차원으로 나옴(그래서 바로 Dense로 받아줄 수 가 있음) / 히든스테이트 1개
+### RNN - 3차원으로 들어가서 2차원으로 나옴(그래서 바로 Dense로 받아줄 수 가 있음)
 
 # 1. 데이터
 x = np.array([[1,2,3],[2,3,4],[3,4,5],[4,5,6]])
@@ -16,7 +16,9 @@ x = x.reshape(4, 3, 1)   # (batch_size, timesteps, feature)   *feature : 몇 개
 
 # 2. 모델구성
 model = Sequential()
-model.add(SimpleRNN(units=10, activation='relu', input_shape=(3, 1)))   # units - output node 개수  # input_shape 에는 항상 데이터의 개수(맨 앞) 무시하고 쓰기
+# model.add(SimpleRNN(units=10, activation='relu', input_shape=(3, 1)))   # units - output node 개수  # input_shape 에는 항상 데이터의 개수(맨 앞) 무시하고 쓰기
+model.add(SimpleRNN(10, activation='relu', input_length=3, input_dim=1))   # 동일한 표현
+                                            # timesteps     # feature
 model.add(Dense(20, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(10, activation='relu'))
