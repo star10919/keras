@@ -1,8 +1,9 @@
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, SimpleRNN, LSTM, GRU
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Dense, SimpleRNN, LSTM, GRU, Input
 from icecream import ic
 
+# 실습 - 함수형으로 바꾸기
 # 결과값이 80 근접하게 튜닝하시오.
 
 # 1. 데이터
@@ -20,16 +21,14 @@ x_predict = x_predict.reshape(1, x_predict.shape[0], 1)
 
 
 # 2. 모델구성
-model = Sequential()
-# model.add(SimpleRNN(units=10, activation='relu', input_shape=(3, 1)))   # units - output node 개수  # input_shape 에는 항상 데이터의 개수(맨 앞) 무시하고 쓰기
-model.add(GRU(units=32, activation='relu', input_shape=(3, 1)))
-model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
-model.add(Dense(16, activation='relu'))
-# model.add(Dense(13, activation='relu'))
-# model.add(Dense(26, activation='relu'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(1))
+input = Input(shape=(3, 1))
+gru = GRU(units=32, activation='relu')(input)
+dense = Dense(32, activation='relu')(gru)
+dense = Dense(16, activation='relu')(dense)
+dense = Dense(16, activation='relu')(dense)
+dense = Dense(10, activation='relu')(dense)
+output = Dense(1)(dense)
+model = Model(inputs=input, outputs=output)
 
 model.summary()
 
@@ -47,5 +46,9 @@ print(results)
 
 
 '''
+*sequential
 [[80.300835]]
+
+*hamsu
+[[79.93359]]
 '''
