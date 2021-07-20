@@ -14,16 +14,19 @@ def split_x(dataset, size):
 
 dataset = split_x(a, size)
 
-print(dataset)
+print("dataset :\n", dataset)
 
 x = dataset[:, :4]
-y = dataset[:, 4]
+y = dataset[:, -1]
 
 print("x :\n", x)
 print("y :", y)
 
 
+
+
 '''
+dataset :
 [[ 1  2  3  4  5]
  [ 2  3  4  5  6]
  [ 3  4  5  6  7]
