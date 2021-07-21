@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
 from icecream import ic
 
-### Dense 는 2차원만 받을 수 있는 게 아님/ 3, 4차원도 받을 수 있음(중요!!)/ 나올 때만 2차원으로 받아주기(layer 중간에 Flatten(2차원으로 만들기) 사용) 
+### 모델링 중간중간에 shape 변경 가능(Reshape 사용)
 
 # 1. 데이터
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -31,11 +31,18 @@ y_test = one.transform(y_test).toarray() # (10000, 10)
 
 # 2. 모델 구성
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
+from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten, Reshape
 
 model = Sequential()
 # model.add(Conv2D(filters=32, kernel_size=(4,4), padding='same', input_shape=(28, 28, 1)))
 model.add(Dense(units=10, activation='relu', input_shape=(28, 28)))   # Dense로도 3, 4차원 데이터 받아줄 수 있음
+model.add(Flatten())        # (N, 280)
+model.add(Dense(784))       # (N, 784)
+model.add(Reshape((28, 28, 1)))         #(N, 28, 28, 1)
+model.add(Conv2D(64, (2,2)))
+model.add(Conv2D(64, (2,2)))
+model.add(Conv2D(64, (2,2)))
+model.add(MaxPool2D())
 model.add(Flatten())
 model.add(Dense(9))
 model.add(Dense(8))
@@ -50,9 +57,9 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
 
-model.fit(x_train, y_train, epochs=1000, batch_size=128, validation_split=0.0012, callbacks=[es])
+model.fit(x_train, y_train, epochs=100, batch_size=128, validation_split=0.0012, callbacks=[es])
 
-# 4. 평가, 예측             predict할 필요는 없다
+# 4. 평가, 예측
 results = model.evaluate(x_test, y_test)
 print('category :', results[0])
 print('accruacy :', results[1])
@@ -84,4 +91,7 @@ category : 0.15464764833450317
 accruacy : 0.954800009727478
 ic| r2: 0.9226106878077964
 ic| rmse: 0.08323233681168003
+
+*dnn + reshape
+
 '''
