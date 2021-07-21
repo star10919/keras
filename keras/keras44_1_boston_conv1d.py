@@ -1,7 +1,7 @@
 from sklearn.preprocessing import MaxAbsScaler, RobustScaler, QuantileTransformer, PowerTransformer
 from sklearn.datasets import load_boston
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Conv2D, Flatten, MaxPool2D, GlobalAveragePooling2D, LSTM
+from tensorflow.keras.layers import Dense, Conv2D, Flatten, MaxPool2D, GlobalAveragePooling2D, LSTM, Conv1D
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 import numpy as np
@@ -34,7 +34,8 @@ x_test = x_test.reshape(152, 13, 1)
 
 #2. 모델
 model = Sequential()
-model.add(LSTM(128, input_shape=(13, 1), activation='relu'))
+model.add(Conv1D(128, 2, input_shape=(13, 1), activation='relu'))
+model.add(Flatten())
 model.add(Dense(128, activation='relu'))
 model.add(Dense(128, activation='relu'))
 model.add(Dense(64, activation='relu'))
@@ -85,5 +86,10 @@ ic| r2: 0.20864773914491164
 걸린시간 : 18.010233879089355
 ic| loss: 19.35918426513672
 ic| r2: 0.7656758336795892
+
+*Conv1d
+걸린시간 : 3.5167489051818848
+ic| loss: 15.395515441894531
+ic| r2: 0.8136521861168895
 '''
 
