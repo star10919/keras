@@ -41,7 +41,8 @@ x_test = x_test.reshape(89, 10, 1)
 
 #2. 모델구성(validation)
 model = Sequential()
-model.add(Conv1D(100, 2, input_shape=(10,1), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
+model.add(LSTM(10, input_shape=(10, 1), activation='relu', return_sequences=True))
+model.add(Conv1D(100, 2, activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
 model.add(Flatten())
 model.add(Dense(64, activation='relu'))
 model.add(Dense(32, activation='relu'))
@@ -96,4 +97,9 @@ ic| r2: 0.5550545863459289
 걸린시간 : 16.57935118675232
 ic| loss: 2188.756591796875
 ic| r2: 0.5978010110126091
+
+*LSTM + Conv1D
+걸린시간 : 91.52887654304504
+ic| loss: 2080.7890625
+ic| r2: 0.6176408093415701
 '''

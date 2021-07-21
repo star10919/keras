@@ -34,7 +34,8 @@ x_test = x_test.reshape(152, 13, 1)
 
 #2. 모델
 model = Sequential()
-model.add(Conv1D(128, 2, input_shape=(13, 1), activation='relu'))
+model.add(LSTM(10, input_shape=(13,1), return_sequences=True, activation='relu'))
+model.add(Conv1D(128, 2, activation='relu'))
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
 model.add(Dense(128, activation='relu'))
@@ -91,5 +92,10 @@ ic| r2: 0.7656758336795892
 걸린시간 : 3.5167489051818848
 ic| loss: 15.395515441894531
 ic| r2: 0.8136521861168895
+
+*LSTM + Conv1D
+걸린시간 : 30.3638174533844
+ic| loss: 11.290112495422363
+ic| r2: 0.863344116663746
 '''
 
