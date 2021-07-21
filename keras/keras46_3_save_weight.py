@@ -5,7 +5,8 @@ from icecream import ic
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 
-# save 파일명 : keras46_1_save_model.h5
+### 가중치 저장 -save_weight 사용(모델은 저장되지 않음!!!!!!!!!!!!!!!!!!!!!!!!!)
+# (순수하게 가중치만 저장됨 / fit 필요없어짐 / compile은 필요함)
 
 #1. 데이터
 datasets = load_diabetes()
@@ -36,39 +37,44 @@ x_val = scaler.transform(x_val)
 #2. 모델구성(validation)
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense
-# model = Sequential()
-# model.add(Dense(128, input_shape=(10,), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
-# # model.add(Dense(64, activation='relu'))
-# model.add(Dense(32, activation='relu'))
+model = Sequential()
+model.add(Dense(128, input_shape=(10,), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
 # model.add(Dense(64, activation='relu'))
-# # model.add(Dense(32, activation='relu'))
-# model.add(Dense(16, activation='relu'))
-# model.add(Dense(8, activation='relu'))
-# model.add(Dense(4, activation='relu'))
-# model.add(Dense(1))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(64, activation='relu'))
+# model.add(Dense(32, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(8, activation='relu'))
+model.add(Dense(4, activation='relu'))
+model.add(Dense(1))
 
 # 컴파일 x, fit x 모델 - 가중치 정해지지 않음(only model만 저장됨)
 # model = load_model('./_save/keras46_1_save_model_1.h5')   # Total params: 8,865
 
 # 컴파일 o, fit o 모델 - 가중치 정해짐(값 계속 똑같음)
-model = load_model('./_save/keras46_1_save_model_2.h5')     # Total params: 8,865
+# model = load_model('./_save/keras46_1_save_model_2.h5')     # Total params: 8,865
 
 
-model.summary()
 
-# model.save('./_save/keras46_1_save_model.h5')
+# model.save('./_save/keras46_1_save_model_1.h5')
+model.save_weights('./_save/keras46_1_save_weight_1.h5')
+
+# model.summary()
 
 
 # #3. 컴파일(ES), 훈련
-# model.compile(loss='mse', optimizer='adam')
+model.compile(loss='mse', optimizer='adam')
 
-# from tensorflow.keras.callbacks import EarlyStopping
-# es = EarlyStopping(monitor='val_loss', patience=3, mode='min', verbose=1)
+from tensorflow.keras.callbacks import EarlyStopping
+es = EarlyStopping(monitor='val_loss', patience=3, mode='min', verbose=1)
 
 import time
 start = time.time()
-# model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=1)
+model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=1)
 end = time.time() - start
+
+# model.save('./_save/keras46_1_save_model_2.h5')
+model.save_weights('./_save/keras46_1_save_weight_2.h5')
 
 
 #4. 평가, 예측(mse, r2)

@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 
 # save 파일명 : keras46_1_save_model.h5
-'''
+
 #1. 데이터
 datasets = load_diabetes()
 
@@ -31,7 +31,7 @@ scaler = StandardScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
 x_val = scaler.transform(x_val)
-'''
+
 
 #2. 모델구성(validation)
 from tensorflow.keras.models import Sequential
@@ -49,16 +49,18 @@ model.add(Dense(1))
 
 model.summary()
 
-model.save('./_save/keras46_1_save_model.h5')
+model.save('./_save/keras46_1_save_model_1.h5')   # 가중치 저장 X(돌릴 때마다 loss, acc 다르게 나옴)
 
-'''
+
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
 
 import time
 start = time.time()
-model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=0)
+model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=1)
 end = time.time() - start
+
+model.save('./_save/keras46_1_save_model_2.h5')     # 가중치 저장 O(돌릴 때마다 loss, acc 같게 나옴)
 
 
 #4. 평가, 예측(mse, r2)
@@ -72,7 +74,7 @@ ic(r2)
 
 
 # 과제 0.62까지 올려라!
-
+'''
 결과값
 ic| loss: 2092.216552734375
 ic| r2: 0.6214054692239842
