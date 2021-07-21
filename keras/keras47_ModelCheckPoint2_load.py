@@ -36,16 +36,16 @@ x_val = scaler.transform(x_val)
 #2. 모델구성(validation)
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense
-model = Sequential()
-model.add(Dense(128, input_shape=(10,), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
-# model.add(Dense(64, activation='relu'))
-model.add(Dense(32, activation='relu'))
-model.add(Dense(64, activation='relu'))
+# model = Sequential()
+# model.add(Dense(128, input_shape=(10,), activation='relu'))  #relu : 음수값은 0, 양수만 제대로 잡음
+# # model.add(Dense(64, activation='relu'))
 # model.add(Dense(32, activation='relu'))
-model.add(Dense(16, activation='relu'))
-model.add(Dense(8, activation='relu'))
-model.add(Dense(4, activation='relu'))
-model.add(Dense(1))
+# model.add(Dense(64, activation='relu'))
+# # model.add(Dense(32, activation='relu'))
+# model.add(Dense(16, activation='relu'))
+# model.add(Dense(8, activation='relu'))
+# model.add(Dense(4, activation='relu'))
+# model.add(Dense(1))
 
 # 컴파일 x, fit x 모델 - 가중치 정해지지 않음(only model만 저장됨)
 # model = load_model('./_save/keras46_1_save_model_1.h5')   # Total params: 8,865
@@ -62,12 +62,12 @@ model.add(Dense(1))
 # model = load_model('./_save/keras46_1_save_weight_2.h5')
 
 
-model.summary()
+# model.summary()
 
 # model.load_weights()
 
 # #3. 컴파일(ES), 훈련
-model.compile(loss='mse', optimizer='adam')
+# model.compile(loss='mse', optimizer='adam')
 
 # from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 # es = EarlyStopping(monitor='val_loss', patience=3, mode='min', verbose=1)
@@ -80,8 +80,8 @@ model.compile(loss='mse', optimizer='adam')
 
 # model.save('./_save/ModelCheckPoint/keras47_model_save.h5')
 
-model = load_model('./_save/ModelCheckPoint/keras47_model_save.h5')         # save_model
-# model = load_model('./_save/ModelCheckPoint/keras47_MCP.hdf5')              # 체크포인트
+# model = load_model('./_save/ModelCheckPoint/keras47_model_save.h5')         # save_model
+model = load_model('./_save/ModelCheckPoint/keras47_MCP.hdf5')              # 체크포인트
 
 
 #4. 평가, 예측(mse, r2)
@@ -110,7 +110,11 @@ ic| r2: 0.7662427290354967
 ic| loss: 1371.6661376953125
 ic| r2: 0.7517918267211269
 
-*load model
+*save model
+ic| loss: 2861.495361328125
+ic| r2: 0.48220159920575856
 
 *checkpoint
+ic| loss: 2826.9541015625
+ic| r2: 0.48845190120873816
 '''

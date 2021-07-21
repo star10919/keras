@@ -23,14 +23,14 @@ ic(x[:30])
 ic(np.min(y), np.max(y))
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=9)
-x_train, x_val, y_train, y_val = train_test_split(x_test, y_test, train_size=0.8, shuffle=True, random_state=9)
+# x_train, x_val, y_train, y_val = train_test_split(x_test, y_test, train_size=0.8, shuffle=True, random_state=9)
 
 #1-2. x 데이터 전처리
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 scaler = StandardScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
-x_val = scaler.transform(x_val)
+# x_val = scaler.transform(x_val)
 
 
 #2. 모델구성(validation)
@@ -51,7 +51,7 @@ model.add(Dense(1))
 # model = load_model('./_save/keras46_1_save_model_1.h5')   # Total params: 8,865
 
 # 컴파일 o, fit o 모델 - 가중치 정해짐(값 계속 똑같음)
-# model = load_model('./_save/keras46_1_save_model_2.h5')     # Total params: 8,865
+# model = load_model('./_save/keras46_1_save_model_2.h5')   # Total params: 8,865
 
 
 
@@ -75,7 +75,7 @@ cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filep
 
 import time
 start = time.time()
-model.fit(x_train, y_train, epochs=100, batch_size=10, verbose=1, callbacks=[es, cp])
+model.fit(x_train, y_train, epochs=100, batch_size=10, validation_split=0.7, verbose=1, callbacks=[es, cp])
 end = time.time() - start
 
 model.save('./_save/ModelCheckPoint/keras47_model_save.h5')
