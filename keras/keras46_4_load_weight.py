@@ -47,20 +47,6 @@ model.add(Dense(8, activation='relu'))
 model.add(Dense(4, activation='relu'))
 model.add(Dense(1))
 
-# 컴파일 x, fit x 모델 - 가중치 정해지지 않음(only model만 저장됨)
-# model = load_model('./_save/keras46_1_save_model_1.h5')   # Total params: 8,865
-
-# 컴파일 o, fit o 모델 - 가중치 정해짐(값 계속 똑같음)
-# model = load_model('./_save/keras46_1_save_model_2.h5')     # Total params: 8,865
-
-
-
-# model.save('./_save/keras46_1_save_model_1.h5')
-# model.save_weights('./_save/keras46_1_save_weight_1.h5')
-
-# model = load_model('./_save/keras46_1_save_weight_1.h5')
-# model = load_model('./_save/keras46_1_save_weight_2.h5')
-
 
 # model.summary()
 
@@ -69,21 +55,24 @@ model.load_weights()
 # #3. 컴파일(ES), 훈련
 model.compile(loss='mse', optimizer='adam')
 
-from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='val_loss', patience=3, mode='min', verbose=1)
+################################ 가중치만 저장된 모델 컴파일 뒤에 로드하기 ################################
+# model = load_model('./_save/keras46_1_save_weight_1.h5')      # 꽝
+model = load_model('./_save/keras46_1_save_weight_2.h5')      # 컴파일 다음에 쓰기(fit 필요 없음-주석처리하기)
+########################################################################################################
 
-import time
-start = time.time()
-model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=1)
-end = time.time() - start
 
-# model.save('./_save/keras46_1_save_model_2.h5')
-# model.save_weights('./_save/keras46_1_save_weight_2.h5')
+# from tensorflow.keras.callbacks import EarlyStopping
+# es = EarlyStopping(monitor='val_loss', patience=3, mode='min', verbose=1)
+
+# import time
+# start = time.time()
+# model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=1)
+# end = time.time() - start
 
 
 #4. 평가, 예측(mse, r2)
 loss = model.evaluate(x_test, y_test)
-print("걸린시간 :", end)
+# print("걸린시간 :", end)
 ic(loss)
 
 y_predict = model.predict(x_test)

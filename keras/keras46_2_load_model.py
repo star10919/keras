@@ -5,7 +5,7 @@ from icecream import ic
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 
-# save 파일명 : keras46_1_save_model.h5
+# load_model(save 파일명 : keras46_1_save_model.h5)
 
 #1. 데이터
 datasets = load_diabetes()
@@ -47,16 +47,9 @@ from tensorflow.keras.layers import Dense
 # model.add(Dense(4, activation='relu'))
 # model.add(Dense(1))
 
-# 컴파일 x, fit x 모델 - 가중치 정해지지 않음(only model만 저장됨)
+######## 컴파일 x, fit x 모델 - 가중치 정해지지 않음(only model만 저장됨) ########
 # model = load_model('./_save/keras46_1_save_model_1.h5')   # Total params: 8,865
-
-# 컴파일 o, fit o 모델 - 가중치 정해짐(값 계속 똑같음)
-model = load_model('./_save/keras46_1_save_model_2.h5')     # Total params: 8,865
-
-
-model.summary()
-
-# model.save('./_save/keras46_1_save_model.h5')
+################################################################################
 
 
 # #3. 컴파일(ES), 훈련
@@ -65,10 +58,19 @@ model.summary()
 # from tensorflow.keras.callbacks import EarlyStopping
 # es = EarlyStopping(monitor='val_loss', patience=3, mode='min', verbose=1)
 
-import time
-start = time.time()
+# import time
+# start = time.time()
 # model.fit(x_train, y_train, epochs=100, batch_size=10, shuffle=True, verbose=1)
-end = time.time() - start
+# end = time.time() - start
+
+######### 컴파일 o, fit o 모델 - 가중치 정해짐(값 계속 똑같음) ########
+model = load_model('./_save/keras46_1_save_model_2.h5')     # Total params: 8,865
+################################################################################
+
+
+model.summary()
+
+
 
 
 #4. 평가, 예측(mse, r2)
