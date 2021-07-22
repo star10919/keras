@@ -87,7 +87,7 @@ y_predict = model2.predict([x1_test, x2_test])
 r2 = r2_score(y_test, y_predict)  # y_test와 y_predict값을 통해 결정계수를 계산
 print('R2 스코어 : ', r2)
 
-print('====================== 2. load_model ======================')
+print('=================== 3. model_checkpoint ===================')
 model3 = load_model('./_save/ModelCheckPoint/keras49_MCP.h5')
 
 results = model3.evaluate([x1_test, x2_test], y_test)
@@ -113,7 +113,7 @@ print('R2 스코어 : ', r2)
 
 
 ################ restore_best_weights=True ###############
-# ====================== 1. 기본 출력 ======================
+# =================== 3. model_checkpoint ===================
 # loss : 1085255.25
 # R2 스코어 :  -1240.1680641964927
 # ====================== 2. load_model ======================
