@@ -2,6 +2,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
+from icecream import ic
 
 #1-1. 데이터
 x = np.array([range(10), range(21,31), range(201,211)])   # (3,10)    # range(10):0~9 / range(21,31):21~30  / range(201,211):201~210
