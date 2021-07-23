@@ -2,6 +2,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
+from icecream import ic
 
 #1. 데이터(훈련데이터와 평가데이터를 나누는 이유 : 과적합에 걸리지 않기 위해서)
 x_train = np.array([1,2,3,4,5,6,7])   # 훈련 데이터(70%)
