@@ -14,6 +14,7 @@ from tensorflow.keras.layers import Dense
 import matplotlib.pyplot as plt
 import random
 import tensorflow as tf
+from icecream import ic
 
 # 1. 데이터
 x = np.array(range(100))
