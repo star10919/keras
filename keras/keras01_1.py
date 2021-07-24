@@ -2,6 +2,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
 import matplotlib.pyplot as plt
+import icecream
 
 #1. 데이터
 x = np.array([1,2,3])  # 스칼라3 벡터1-1차원임
