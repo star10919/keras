@@ -2,7 +2,7 @@ import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import matplotlib.pyplot as plt
-from icecream import ic
+
 
 x = np.array([1, 2, 3, 4, 5])
 y = np.array([1, 2, 4, 3, 5])
