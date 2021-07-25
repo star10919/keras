@@ -5,7 +5,7 @@ from icecream import ic
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 
-### ES의 단점 : patience까지 밀려남 을 보완하기 위하여 MdelCheckPoint사용 - model.fit에서 함
+### ES의 단점 : patience까지 밀려남 을 보완하기 위하여 ModelCheckPoint사용 - model.fit에서 함
 
 #1. 데이터
 datasets = load_diabetes()
@@ -26,7 +26,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffl
 # x_train, x_val, y_train, y_val = train_test_split(x_test, y_test, train_size=0.8, shuffle=True, random_state=9)
 
 #1-2. x 데이터 전처리
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)

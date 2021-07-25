@@ -50,7 +50,6 @@ model.add(Dense(1))
 
 # model.summary()
 
-model.load_weights()
 
 # #3. 컴파일(ES), 훈련
 model.compile(loss='mse', optimizer='adam')
