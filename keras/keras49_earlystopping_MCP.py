@@ -1,5 +1,5 @@
 import numpy as np
-from icecream import ic
+from icecream 
 from sklearn.metrics import r2_score
 
 ### concatenate(메소드), Concatenate(클래스) - 앙상블((함수형)모델 합치기)
