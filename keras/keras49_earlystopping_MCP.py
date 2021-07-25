@@ -19,7 +19,7 @@ x1_train, x1_test, x2_train, x2_test, y_train, y_test = train_test_split(x1, x2,
 # ic(x1_train.shape, x1_test.shape, y_train.shape)   # x1_train.shape: (70, 3), x1_test.shape: (30, 3), y_train.shape: (70,)
 
 #2. 모델구성
-from tensorflow.keras.models import Sequential, Model, load_model
+from tensorflow.keras.models import Model, load_model
 from tensorflow.keras.layers import Dense, Input
 
 #2-1. 모델1
@@ -52,7 +52,7 @@ model.summary()
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
 
 from keras.callbacks import EarlyStopping, ModelCheckpoint
-es = EarlyStopping(monitor='val_loss', patience=20, mode='auto', verbose=1, restore_best_weights=True)
+es = EarlyStopping(monitor='val_loss', patience=20, mode='auto', verbose=1, restore_best_weights=True)   # restore_best_weights=True 추가하면 MCP, save model 동일하게 저장됨
 
 mcp = ModelCheckpoint(monitor='val_loss', mode='auto', save_best_only=True, verbose=1, filepath='./_save/ModelCheckPoint/keras49_MCP.h5')
 
