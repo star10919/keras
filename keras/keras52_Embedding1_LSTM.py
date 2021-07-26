@@ -1,6 +1,8 @@
 from tensorflow.keras.preprocessing.text import Tokenizer
 import numpy as np
 
+### Embedding
+
 # 1. 데이터
 docs = ['너무 재밌어요', '참 최고에요', '참 잘 만든 영화예요','추천하고 싶은 영화입니다.','한 번 더 보고 싶네요','글쎄요','별로에요','생각보다 지루해요',
         '연기가 어색해요','재미없어요','너무 재미없다','참 재밌네요','청순이가 잘 생기긴 했어요']
