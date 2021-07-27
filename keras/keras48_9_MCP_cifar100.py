@@ -12,14 +12,12 @@
 import numpy as np
 from tensorflow.keras.datasets import cifar100
 from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Dense, Conv2D, Flatten, MaxPool2D, Dropout, GlobalAveragePooling2D, Conv1D
+from tensorflow.keras.layers import Dense, Conv2D, Flatten, MaxPool2D, Dropout, GlobalAveragePooling2D, Conv1D, LSTM
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler, PowerTransformer, QuantileTransformer
 import time 
 import matplotlib.pyplot as plt
-from tensorflow.python.keras.layers.pooling import GlobalAveragePooling1D
-from tensorflow.python.keras.layers.recurrent import LSTM
 
 ### GlobalAveragePooling2D
 
