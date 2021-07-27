@@ -17,14 +17,16 @@ ic(y_train.shape, y_test.shape)     # y_train.shape: (25000,), y_test.shape: (25
 
 ic(type(x_train))       # <class 'numpy.ndarray'>
 
-print('뉴스기사의 최대길이 :', max(len(i) for i in x_train))      #2494
-print('뉴스기사의 평균길이 :', sum(map(len, x_train)) / len(x_train))     #238.714
+print('최대길이 :', max(len(i) for i in x_train))      #2494
+print('평균길이 :', sum(map(len, x_train)) / len(x_train))     #238.714
 
+
+# 1-2. 전처리
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
 
-x_train = pad_sequences(x_train, maxlen=100, padding='pre')
-x_test = pad_sequences(x_test, maxlen=100, padding='pre')
+x_train = pad_sequences(x_train, maxlen=200, padding='pre')
+x_test = pad_sequences(x_test, maxlen=200, padding='pre')
 ic(x_train.shape, x_test.shape)     # x_train.shape: (25000, 100), x_test.shape: (25000, 100)
 ic(type(x_train), type(x_train[0]))     # <class 'numpy.ndarray'>, <class 'numpy.ndarray'>
 ic(x_train[0])
@@ -36,11 +38,11 @@ ic(y_train.shape, y_test.shape)     # y_train.shape: (25000, 2), y_test.shape: (
 
 # 2. 모델 구성
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Flatten, Conv1D, LSTM, Embedding
+from tensorflow.keras.layers import Dense, Flatten, Conv1D, LSTM, Embedding, GRU
 
 model = Sequential()
-model.add(Embedding(input_dim=10000, output_dim=200, input_length=100))
-model.add(LSTM(100, activation='relu', return_sequences=True))
+model.add(Embedding(input_dim=10000, output_dim=200, input_length=200))
+model.add(GRU(100, activation='relu', return_sequences=True))
 model.add(Conv1D(100, 2, activation='relu'))
 model.add(Flatten())
 model.add(Dense(64, activation='relu'))
@@ -56,7 +58,7 @@ es = EarlyStopping(monitor='val_loss', mode='min', patience=7, verbose=1)
 
 import time
 start = time.time()
-model.fit(x_train, x_test, epochs=500, batch_size=1000, validation_split=0.2, callbacks=[es])
+model.fit(x_train, y_train, epochs=50, batch_size=256, validation_split=0.2, callbacks=[es])
 end = time.time() - start
 
 
