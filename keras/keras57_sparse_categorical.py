@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
 from icecream import ic
 
-### onehotencoding 귀찮으면? sparse_categorical_crossentropy
+### onehotencoding 귀찮으면? sparse_categorical_crossentropy (categorical_crossentropy대신 sparse_categorical_crossentropy 쓰기)
 
 # 1. 데이터
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -17,7 +17,6 @@ x_test = x_test.reshape(10000, 28, 28, 1)   # 컨벌루션은 무조건 4차원�
 ic(np.unique(y_train))   # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 y_train = y_train.reshape(-1,1)
 y_test = y_test.reshape(-1,1)
-
 '''
 # #1-2. 데이터 전처리
 from sklearn.preprocessing import OneHotEncoder
@@ -52,7 +51,7 @@ model.summary()
 
 
 # 3. 컴파일, 훈련           metrics['acc]
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', patience=10, mode='min', verbose=1)
