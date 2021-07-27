@@ -1,4 +1,3 @@
-from math import e
 from tensorflow.keras.datasets import reuters
 import numpy as np
 import pandas as pd
@@ -63,7 +62,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc']
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', mode=min, verbose=1)
 
-model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.2)
+model.fit(x_train, y_train, epochs=100, batch_size=50, validation_split=0.2)
 
 
 # 4. 평가, 예측
