@@ -58,7 +58,7 @@ es = EarlyStopping(monitor='val_loss', mode='min', patience=7, verbose=1)
 
 import time
 start = time.time()
-model.fit(x_train, y_train, epochs=50, batch_size=256, validation_split=0.2, callbacks=[es])
+model.fit(x_train, y_train, epochs=13, batch_size=1000, validation_split=0.2, callbacks=[es])
 end = time.time() - start
 
 
@@ -67,3 +67,12 @@ results = model.evaluate(x_test, y_test)
 print('걸린시간 :', end)
 print('binary :', results[0])
 print('acc :', results[1])
+
+
+'''
+Epoch 00010: early stopping
+782/782 [==============================] - 81s 103ms/step - loss: 0.9340 - acc: 0.8401
+걸린시간 : 89.68203496932983
+binary : 0.9339950084686279
+acc : 0.8401200175285339
+'''
